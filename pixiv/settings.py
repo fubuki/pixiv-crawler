@@ -37,6 +37,16 @@ DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
+ITEM_PIPELINES = {
+    'pixiv.pipelines.PixivImagesPipeline': 1,
+    'pixiv.pipelines.MongoPipeline': 2
+}
+IMAGES_STORE = '/path/file/'
+
+MONGO_URI = '127.0.0.1'
+MONGO_DATABASE = 'pixiv'
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pixiv (+http://www.yourdomain.com)'
 

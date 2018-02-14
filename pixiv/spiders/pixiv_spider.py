@@ -3,11 +3,15 @@
 import scrapy
 from scrapy.exceptions import *
 from scrapy_splash import SplashRequest
-
+from pixiv.items import PixivDataItem
+import datetime
+import time
+import itertools
 
 class PixivSpider(scrapy.Spider):
     name = "pixiv"
     allowed_domains = ['pixiv.net']
+    start_urls = ["http://pixiv.net/"]
 
     def start_requests(self):
         return [scrapy.Request(url='https://accounts.pixiv.net/login', callback=self.after_login)]
@@ -45,5 +49,22 @@ class PixivSpider(scrapy.Spider):
             .xpath("@style") \
             .re('url\((.+)\)')
 
-        for url in image_list:
-            print url
+        member_list = response \
+            .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//li/a') \
+            .xpath('@href') \
+            .re('illust_id=(\d+)')
+
+        illust_list = response \
+            .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//ul/li[2]/a') \
+            .xpath('@href') \
+            .re("id=(\d+)")
+
+        for member_id, illust_id, url in itertools.izip(member_list, illust_list, image_list):
+            item = PixivDataItem()
+            item['member_id'] = member_id
+            item['illust_id'] = illust_id
+            item['image_urls'] = [url]
+            item['bookmark'] = 0
+            item['created_at'] = int(time.time())
+            yield item
+
