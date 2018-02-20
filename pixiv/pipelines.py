@@ -14,7 +14,13 @@ class PixivImagesPipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:
-            yield scrapy.Request(image_url)
+            yield scrapy.Request(image_url, meta={'m_id': item['member_id'], 'i_id': item['illust_id']})
+
+    def file_path(self, request, response=None, info=None):
+        m_id = request.meta['m_id']
+        i_id = request.meta['i_id']
+        print 'm_id = ' + m_id
+        return 'full/%s/%s.jpg' % (m_id, i_id)
 
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
