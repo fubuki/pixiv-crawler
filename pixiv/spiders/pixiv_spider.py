@@ -14,7 +14,10 @@ class PixivSpider(scrapy.Spider):
     start_urls = ["http://pixiv.net/"]
 
     def start_requests(self):
-        yield SplashRequest(self.generate_search_url(), self.parse)
+        setting = self.settings
+        page = setting['CRAWL_PAGE']
+        for p in range(1, page + 1):
+            yield SplashRequest(self.generate_search_url(page=p), self.parse)
         #return [scrapy.Request(url='https://accounts.pixiv.net/login', callback=self.after_login)]
 
     def after_login(self, response):
