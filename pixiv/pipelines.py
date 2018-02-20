@@ -19,7 +19,6 @@ class PixivImagesPipeline(ImagesPipeline):
     def file_path(self, request, response=None, info=None):
         m_id = request.meta['m_id']
         i_id = request.meta['i_id']
-        print 'm_id = ' + m_id
         return 'full/%s/%s.jpg' % (m_id, i_id)
 
     def item_completed(self, results, item, info):
