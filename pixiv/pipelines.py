@@ -5,10 +5,12 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+import imagehash
 import pymongo
 import scrapy
 from scrapy.pipelines.images import ImagesPipeline
 from scrapy.exceptions import DropItem
+from PIL import Image
 
 class PixivImagesPipeline(ImagesPipeline):
 
@@ -52,5 +54,7 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         del item['image_urls']
-        self.db[self.collection_name].insert_one(dict(item))
+        full_image_path = spider.settings['IMAGES_STORE'] + '/' + item['image_paths'][0]
+        item['image_hash'] = str(imagehash.phash(Image.open(full_image_path)))
+        self.db[self.collection_name].update({'illust_id': item['illust_id']}, dict(item), upsert=True)
         return item

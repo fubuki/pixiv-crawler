@@ -14,5 +14,6 @@ class PixivDataItem(scrapy.Item):
     image_urls = scrapy.Field()
     images = scrapy.Field()
     image_paths = scrapy.Field()
+    image_hash = scrapy.Field()
     bookmark = scrapy.Field()
     created_at = scrapy.Field()
