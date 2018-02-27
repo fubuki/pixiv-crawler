@@ -49,12 +49,12 @@ class PixivSpider(scrapy.Spider):
             .xpath("@style") \
             .re('url\((.+)\)')
 
-        member_list = response \
+        illust_list = response \
             .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//li/a') \
             .xpath('@href') \
             .re('illust_id=(\d+)')
 
-        illust_list = response \
+        member_list = response \
             .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//ul/li[2]/a') \
             .xpath('@href') \
             .re("id=(\d+)")
