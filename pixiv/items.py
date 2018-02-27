@@ -17,3 +17,7 @@ class PixivDataItem(scrapy.Item):
     image_hash = scrapy.Field()
     bookmark = scrapy.Field()
     created_at = scrapy.Field()
+
+class InsidePageItem(scrapy.Item):
+    illust_id = scrapy.Field()
+    tag = scrapy.Field()
