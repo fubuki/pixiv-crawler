@@ -48,16 +48,18 @@ class PixivSpider(scrapy.Spider):
         return url.format(page=page)
 
     def parse(self, response):
+
         illust_list = response \
-            .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//li/a') \
+            .xpath('//section[@id="js-react-search-mid"]//div//figcaption//li/a') \
             .xpath('@href') \
             .re('illust_id=(\d+)')
 
         member_list = response \
-            .xpath('//section[@id="js-react-search-mid"]//div[@class="_7IVJuWZ"]//figcaption//ul/li[2]/a') \
+            .xpath('//section[@id="js-react-search-mid"]//div//figcaption//ul/li[2]/a') \
             .xpath('@href') \
             .re("id=(\d+)")
 
+        print illust_list
         for member_id, illust_id in itertools.izip(member_list, illust_list):
             illust_url = 'https://www.pixiv.net/member_illust.php?mode=medium&illust_id={illust_id}'
             yield SplashRequest(
