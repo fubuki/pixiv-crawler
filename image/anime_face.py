@@ -16,7 +16,6 @@ def detect(image):
     gray = cv2.equalizeHist(gray)
 
     faces = cascade.detectMultiScale(gray,
-            # 認識用オプション
             scaleFactor = 1.1,
             minNeighbors = 1,
             minSize = (24,24))
