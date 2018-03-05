@@ -26,12 +26,10 @@ def detect(image):
 filename = "/home/zero/exp/[SFEO-Raws] God Eater - 02 (BD 720P x264 10bit AAC)[6FF39F92].mp4"
 cap = cv2.VideoCapture(filename)
 
-# 顔だけを切り出して保存する
 framenum = 0
 faceframenum = 0
 color = (0,0,255)
 
-# 保存先のディレクトリ作成
 path = os.path.splitext(filename)
 dir_path = path[0] + '_face'
 if os.path.isdir(dir_path) == False:
@@ -47,7 +45,7 @@ while(cap.isOpened()):
     if framenum%50 == 0:
         faces = detect(image)
         if len(faces) == 0:
-            continue # 認識結果がnullなら次のフレームへ
+            continue
 
         for rect in faces:
             x = rect[0]
