@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import cv2
-import animeface
-import PIL.Image
 
 
 def face(filename, cascade_file="lbpcascade_animeface.xml"):
@@ -18,17 +16,10 @@ def face(filename, cascade_file="lbpcascade_animeface.xml"):
                                      scaleFactor=1.1,
                                      minNeighbors=1,
                                      minSize=(24, 24))
+    return face
 
-    if len(faces) > 0:
-        return faces
 
     return None
-
-
-def face2(filename):
-    im = PIL.Image.open(filename)
-    faces = animeface.detect(im)
-    return faces
 
 
 def img_sift(filename):
