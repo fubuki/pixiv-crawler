@@ -2,6 +2,8 @@
 
 BOT_NAME = 'pixiv'
 
+TAGS = ['Fate/GrandOrder']
+
 SPIDER_MODULES = ['pixiv.spiders']
 NEWSPIDER_MODULE = 'pixiv.spiders'
 
