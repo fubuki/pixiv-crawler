@@ -16,8 +16,10 @@ class PixivSpider(scrapy.Spider):
     def start_requests(self):
         setting = self.settings
         page = setting['CRAWL_PAGE']
-        for p in range(1, page + 1):
-            yield SplashRequest(self.generate_search_url(page=p), self.parse)
+        tags = setting['TAGS']
+        for tag in tags:
+            for p in range(1, page + 1):
+                yield SplashRequest(self.generate_search_url(page=p, tag=tag), self.parse)
         #return [scrapy.Request(url='https://accounts.pixiv.net/login', callback=self.after_login)]
 
     def after_login(self, response):
@@ -43,9 +45,9 @@ class PixivSpider(scrapy.Spider):
 
         yield SplashRequest(self.generate_search_url(), self.parse)
 
-    def generate_search_url(self, page=1):
-        url = 'https://www.pixiv.net/search.php?s_mode=s_tag&p={page}&word=Fate%2FGrandOrder&order=date_d'
-        return url.format(page=page)
+    def generate_search_url(self, page=1, tag=None):
+        url = 'https://www.pixiv.net/search.php?s_mode=s_tag&p={page}&word={tag}&order=date_d'
+        return url.format(page=page, tag=tag)
 
     def parse(self, response):
 
