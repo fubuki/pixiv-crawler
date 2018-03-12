@@ -75,9 +75,6 @@ class PixivSpider(scrapy.Spider):
         image_url = response.xpath('//div[@class="img-container"]//img').xpath('@src').extract()
         bookmark = response.xpath('//section[@class="score"]//li[2]//span[2]/text()').extract_first()
 
-        print tag_list
-        print image_url
-        print bookmark
         for tag in tag_list:
             inside = InsidePageItem()
             inside['illust_id'] = response.meta['illust_id']
