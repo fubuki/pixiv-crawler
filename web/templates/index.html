@@ -56,26 +56,15 @@
 
 <main role="main">
 
-    <section class="jumbotron text-center">
+    <section class="jumbotron">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-                        <input type="text" class="form-control" placeholder="Search for...">
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
+            <form method="get" action="/search">
+                <div class="form-group">
+                    <label>pixiv tags</label>
+                    <input class="form-control" name="tags" placeholder="search tags">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </section>
 
