@@ -4,7 +4,8 @@ import cv2
 import fire
 import anime
 import os
-
+import imagehash
+from PIL import Image
 
 class Search(object):
     def double(self, number):
@@ -85,6 +86,12 @@ class Search(object):
         img3 = cv2.drawMatchesKnn(object_img, object_kp, image_img, image_kp, matches, None, **draw_params)
 
         cv2.imwrite("search_object.png", img3)
+
+    def imagehash(self, source, dest):
+        source_hash = imagehash.phash(Image.open(source))
+        dest_hash = imagehash.phash(Image.open(dest))
+        print 1 - (source_hash - dest_hash) * 1.0/len(source_hash.hash)**2
+
 
 
 if __name__ == '__main__':
