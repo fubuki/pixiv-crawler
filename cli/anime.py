@@ -10,7 +10,7 @@ def face(img, cascade_file="lbpcascade_animeface.xml"):
 
     faces = cascade.detectMultiScale(gray,
                                      scaleFactor=1.1,
-                                     minNeighbors=1,
+                                     minNeighbors=5,
                                      minSize=(24, 24))
     return faces
 

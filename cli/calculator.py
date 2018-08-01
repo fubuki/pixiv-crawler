@@ -3,13 +3,14 @@
 import cv2
 import fire
 import anime
+import os
 
 
 class Search(object):
     def double(self, number):
         return 2 * number
 
-    def image_face(self, source, dest):
+    def image_face(self, source):
         cascade_file = "lbpcascade_animeface.xml"
         if not os.path.isfile(cascade_file):
             raise RuntimeError("%s: not found" % cascade_file)
@@ -19,14 +20,10 @@ class Search(object):
 
         if len(faces) > 0:
             img = cv2.imread(source)
-            for rect in faces:
-                x = rect[0]
-                y = rect[1]
-                width = rect[2]
-                height = rect[3]
-                dst = img[y:y + height, x:x + width]
-                if dst is not None:
-                    cv2.imwrite(dest, dst)
+            for index, (x, y, w, h) in enumerate(faces):
+                ##cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                dst = img[y:y + h, x:x + w]
+                cv2.imwrite("fate-" + str(index) + ".jpg" , dst)
 
     def anime_face(self, filename):
 
