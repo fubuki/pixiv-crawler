@@ -1,0 +1,37 @@
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "match_all":{}
+      },
+      "boost_mode": "multiply",
+      "functions": [
+        {
+          "script_score": {
+            "script": {
+              "file": "bitcount",
+              "params": {
+                "source_hash": "10101"
+              },
+              "lang": "painless"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "_score": {
+        "order": "desc"
+      }
+    },
+    {
+      "id": {
+        "order": "desc"
+      }
+    }
+  ],
+  "from": 0,
+  "size": 10
+}

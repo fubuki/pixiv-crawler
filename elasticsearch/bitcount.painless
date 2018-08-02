@@ -1,0 +1,9 @@
+def source_hash = params.source_hash;
+def dest_hash = doc.hash.value;
+
+def b1 = BitSet.valueOf(new long[] { Long.parseLong(source_hash, 2) });
+def b2 = BitSet.valueOf(new long[] { Long.parseLong(dest_hash, 2) });
+
+b1.xor(b2);
+return b1.cardinality();
+

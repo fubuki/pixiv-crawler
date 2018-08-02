@@ -1,13 +1,15 @@
 {
-  "mappings": {
     "pixiv": {
-      "properties": {
-        "title": {"type": "text"},
-        "hash": {"type": "keyword"},
-        "created":  {
-          "type":   "date"
+        "properties": {
+            "title": {
+                "type": "text"
+            },
+            "hash": {
+                "type": "keyword"
+            },
+            "created":  {
+                "type":   "date"
+            }
         }
-      }
     }
-  }
 }
