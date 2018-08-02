@@ -5,6 +5,7 @@ import fire
 import anime
 import os
 import imagehash
+import binascii
 from PIL import Image
 
 class Search(object):
@@ -91,7 +92,6 @@ class Search(object):
         source_hash = imagehash.phash(Image.open(source))
         dest_hash = imagehash.phash(Image.open(dest))
         print 1 - (source_hash - dest_hash) * 1.0/len(source_hash.hash)**2
-
 
 
 if __name__ == '__main__':

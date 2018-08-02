@@ -11,7 +11,7 @@
             "script": {
               "file": "bitcount",
               "params": {
-                "source_hash": "10101"
+                "source_hash": "1101110111110111010000100001000000001001001110010111110111100100"
               },
               "lang": "painless"
             }
