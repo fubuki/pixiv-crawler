@@ -47,10 +47,8 @@ class PixivRankSpider(scrapy.Spider):
             )
 
     def parse_inside_page(self, response):
-        print response.url
         item = response.meta['item']
         image_url = response.xpath('//div[@class="img-container"]//img').xpath('@src').extract()
-        print image_url
         if len(image_url) > 0:
             item['image_urls'] = image_url
 

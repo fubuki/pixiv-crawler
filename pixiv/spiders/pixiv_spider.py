@@ -61,7 +61,6 @@ class PixivSpider(scrapy.Spider):
             .xpath('@href') \
             .re("id=(\d+)")
 
-        print illust_list
         for member_id, illust_id in itertools.izip(member_list, illust_list):
             illust_url = 'https://www.pixiv.net/member_illust.php?mode=medium&illust_id={illust_id}'
             yield SplashRequest(
